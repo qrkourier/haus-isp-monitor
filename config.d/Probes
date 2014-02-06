@@ -1,0 +1,21 @@
+*** Probes ***
+
++ FPing
+binary = /usr/bin/fping
+
++ AnotherSSH
+forks = 5
+offset = 50%
+step = 300
+
++AnotherDNS
+forks = 5
+offset = 50%
+step = 300
+
++EchoPingSmtp
+binary = /usr/bin/echoping
+forks = 5
+offset = 50%
+step = 300
+

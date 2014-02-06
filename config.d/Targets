@@ -1,0 +1,179 @@
+*** Targets ***
+
+probe = FPing
+menu = Top
+title = OpenHaus Network Monitor
+remark = this probes for network problems from the perspective of Ken's\
+"kbastian" VM in Gandi.net's EU datacenter.
+
++ WaveCable
+menu = WaveCable
+title = Wave Broadband
+remark = OpenHaus Cable Internet Service Provider
+
+#+ xe0-0-1-2-core1-d
+#menu = xe0-0-1-2-core1-d
+#title = xe0-0-1-2-core1-d.paris.gandi.net
+#host = 217.70.176.237
+
+#+ xe0-0-2-1
+#menu = xe0-0-2-1
+#title = xe0-0-2-1.c1-4-d.core4-d.paris.gandi.net
+#host = 217.70.176.226
+
+
+#+ xe2-1-24-vcore1-dc1
+#menu = xe2-1-24-vcore1-dc1
+#title = xe2-1-24-vcore1-dc1.balt.gandi.net
+#host = 217.70.176.234
+
+
+#+ ge-11-3-5
+#menu = ge-11-3-5
+#title = ge-11-3-5.mpr1.bwi9.us.above.net
+#host = 64.125.192.85
+
+
+#+ xe-3-3-0
+#menu = xe-3-3-0
+#title = xe-3-3-0.cr1.dca2.us.above.net
+#host = 64.125.28.138
+
+
+#+ ae5
+#menu = ae5
+#title = ae5.cr1.lga5.us.above.net
+#host = 64.125.26.98
+
+
+#+ ae6
+#menu = ae6
+#title = ae6.cr1.ord2.us.above.net
+#host = 64.125.24.34
+
+
+#+ ae2
+#menu = ae2
+#title = ae2.mpr1.sea1.us.above.net
+#host = 64.125.20.69
+
+
+#+ cr2-sea-b-p250
+#menu = cr2-sea-b-p250
+#title = cr2-sea-b-p250.bb.spectrumnet.us
+#host = 206.81.80.56
+
+
+++ 24-113-43-10
+menu = 24-113-43-10
+title = 24-113-43-10.wavecable.com
+host = 24.113.43.10
+remark = from Gandi's perspective, this is the first\
+node in the route operated by Wave.
+
+++ c-24-143-96-1
+menu = c-24-143-96-1
+title = c-24-143-96-1.customer.broadstripe.net
+host = 24.143.96.1
+remark = This is the customer's default gateway\
+advertised to the PC via DHCP.
+
+++ door
+menu = door.openhaus.io
+title = door.openhaus.io
+host = 24.143.98.211
+remark = This is the public IP leased to us by Wave. It's normally occupied by\
+the gate.haus router.
+
++ Mint
+probe = AnotherSSH 
+menu = Mint
+title = Kayobi's Mac Mini running Linux Mint
+
+++ ssh-to-mint
+menu = ssh-altport
+title = Internet OpenSSH listener for Mint
+remark = door.openhaus.io:20022
+host = door.openhaus.io
+greeting = SSH-Latency-Measurement-by-kbastian
+interval = established
+mininterval = 0.5
+pings = 5
+port = 20022
+timeout = 5
+
+++ rtunnel-via-kbastian
+menu = ssh-rtunnel
+title = Reverse tunnel via kbastian
+host = localhost
+remark = Mint maintains an SSH reverse tunnel to kbastian in case ingress\
+ability is lost. localhost:20022 on kbastian.kourier.io
+greeting = SSH-Latency-Measurement-by-kbastian
+interval = established
+mininterval = 0.5
+pings = 5
+port = 20022
+timeout = 5
+
++ Bakunin
+probe = AnotherSSH 
+menu = Bakunin
+title = Dann's Ubuntu Server
+
+++ ssh-to-bakunin
+menu = ssh-altport
+title = Internet OpenSSH listener 
+remark = door.openhaus.io:8443
+host = door.openhaus.io
+greeting = SSH-Latency-Measurement-by-kbastian
+interval = established
+mininterval = 0.5
+pings = 5
+port = 8443
+timeout = 5
+
+
++ Reference
+probe = AnotherDNS 
+menu = Reference
+title = Points of reference
+remark = Some monitors of other services on the Internet that are probably\
+healthy for comparison with our own.
+
+++ OpenDNS
+host = 208.67.222.222
+menu = opendns
+title = OpenDNS recursive resolver
+lookup = myip.opendns.com
+mininterval = 0.5
+pings = 5
+port = 53
+recordtype = A
+require_answers = 1
+require_noerror = 0
+timeout = 5
+
+
+++ Gmail
+probe = EchoPingSmtp
+host = gmail-smtp-in.l.google.com
+menu = gmail
+title = Gmail's main SMTP server
+ipversion = 4
+pings = 5
+priority = 6
+timeout = 1
+tos = 0xa0
+waittime = 1
+
+
+#+ Local
+#menu = Local
+#title = Local Network
+##parents = owner:/Test/James location:/
+
+#++ LocalMachine
+#menu = Local Machine
+#title = This host
+#host = localhost
+##alerts = someloss

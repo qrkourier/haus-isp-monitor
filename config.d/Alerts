@@ -1,0 +1,10 @@
+*** Alerts ***
+to = pointfive@bingnet.net
+from = smokeping@kbastian.kourier.io
+
++someloss
+type = loss
+# in percent
+pattern = >0%,*12*,>0%,*12*,>0%
+comment = loss 3 times  in a row
+
